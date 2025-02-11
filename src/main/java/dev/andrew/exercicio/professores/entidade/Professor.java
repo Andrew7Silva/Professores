@@ -21,7 +21,8 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Professor.findAll", query = "SELECT p FROM Professor p"),
     @NamedQuery(name = "Professor.findById", query = "SELECT p FROM Professor p WHERE p.id = :id"),
     @NamedQuery(name = "Professor.findByNome", query = "SELECT p FROM Professor p WHERE p.nome = :nome"),
-    @NamedQuery(name = "Professor.findByTitulacao", query = "SELECT p FROM Professor p WHERE p.titulacao = :titulacao")})
+    @NamedQuery(name = "Professor.findByTitulacao", query = "SELECT p FROM Professor p WHERE p.titulacao = :titulacao"),
+    @NamedQuery(name = "Professor.findByInstituto", query = "SELECT p FROM Professor p WHERE p.instituto = :instituto")})
 public class Professor implements Serializable {
     private static final long serialVersionUID = 2L;
     @Id
@@ -29,22 +30,32 @@ public class Professor implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
-    @Column(name = "nome", nullable = false, length = 100)
+    @Column(name = "nome", length = 100)
     private String nome;
-
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 40)
-    @Column(name = "titulacao", nullable = false, length = 40)
+    @Column(name = "titulacao", length = 40)
     private String titulacao;
-
     @JoinColumn(name = "instituto", referencedColumnName = "id") // referencedColumnName (opcional)
     @ManyToOne(optional = false)
     private Instituto instituto;
+
+    public Professor() {
+    }
+
+    public Professor(Integer id) {
+        this.id = id;
+    }
+
+    public Professor(Integer id, String nome, String titulacao) {
+        this.id = id;
+        this.nome = nome;
+        this.titulacao = titulacao;
+    }
 
     public Integer getId() {
         return id;
@@ -67,7 +78,7 @@ public class Professor implements Serializable {
     }
 
     public void setTitulacao(String titulacao) {
-        this.titulacao = titulacao;
+            this.titulacao = titulacao;
     }
 
     public Instituto getInstituto() {
@@ -104,7 +115,7 @@ public class Professor implements Serializable {
 
     @Override
     public String toString() {
-        return "br.edu.ufra.entidade.Professor[ id=" + id + " ]";
+        return "dev.andrew.exercicio.professores.entidade.Professor[ id=" + id + " ]";
     }
 
 }

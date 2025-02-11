@@ -34,13 +34,13 @@ public class Instituto implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
-    @Column(name = "nome", nullable = false, length = 50)
+    @Column(name = "nome", length = 50)
     private String nome;
 
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
-    @Column(name = "sigla", nullable = false, length = 10)
+    @Column(name = "sigla", length = 10)
     private String sigla;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "instituto")
@@ -118,7 +118,7 @@ public class Instituto implements Serializable {
 
     @Override
     public String toString() {
-        return "br.edu.ufra.entidade.Instituto[ id=" + id + " ]";
+        return "dev.andrew.exercicio.professores.entidade.Instituto[ id=" + id + " ]";
     }
 
 }

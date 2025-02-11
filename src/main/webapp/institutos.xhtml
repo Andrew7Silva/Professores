@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Listagem de Institutos</title>
+</h:head>
+<h:body>
+    <h:form id="formInstitutos">
+        <p:growl showDetail="true" showSummary="true" />
+
+        <h1>Institutos</h1>
+
+        <p:commandButton action="instituto.xhtml" value="Novo instituto"/>
+        <p:button outcome="/index.xhtml" value="Cancelar"/>
+
+        <br/>
+        <br/>
+
+        <p:dataTable value="#{institutoBean.institutos}" var="i">
+            <p:column headerText="Nome">
+                <h:outputText value="#{i.nome}"/>
+            </p:column>
+
+            <p:column headerText="Sigla">
+                <h:outputText value="#{i.sigla}"/>
+            </p:column>
+
+            <p:column headerText="Operações">
+                <p:commandButton
+                        value="Editar"
+                        action="/instituto.xhtml"
+                        ajax="false">
+                    <f:setPropertyActionListener target="#{institutoBean.instituto}" value="#{i}"/>
+                </p:commandButton>
+
+                <p:commandButton
+                        value="Excluir"
+                        action="#{institutoBean.excluir()}"
+                        ajax="false">
+                    <f:setPropertyActionListener target="#{institutoBean.instituto}" value="#{i}"/>
+                </p:commandButton>
+            </p:column>
+
+        </p:dataTable>
+    </h:form>
+</h:body>
+</html>
